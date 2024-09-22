@@ -1,641 +1,477 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LZ GANG - Accueil</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>En Ligne Shop</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Anta&family=Roboto+Slab:wght@100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Anta', sans-serif;
-        }
-        /* Si vous voulez utiliser Roboto Slab pour certains éléments */
-        h1, h2, h3 {
-            font-family: 'Roboto Slab', serif;
+            font-family: 'Protest Guerrilla', system-ui, sans-serif;
+            background-color: #1f1f1f;
+            color: #fff;
         }
 
-    img {
-        max-width: 100%; /* Limite la largeur de l'image à la taille de son conteneur */
-        height: auto; /* Permet à l'image de conserver ses proportions originales */
-        display: block; /* Assure que l'image ne se superpose pas aux éléments adjacents */
-        margin: auto; /* Centre l'image horizontalement */
-    }
+        header {
+            background-color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-        
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
-    position: relative;
-}
+        h1 {
+            font-size: 2.5em;
+            color: #ff9800;
+        }
 
-header {
-    text-align: center;
-    padding: 20px 0;
-}
+        nav {
+            display: flex;
+        }
 
-header h1 {
-    margin: 0;
-    color: #fff;
-}
+        nav button {
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
+        nav button:hover {
+            background-color: #45a049;
+        }
 
-   .header {
-    height: 300px; /* Ajustez la hauteur selon vos besoins */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.header img {
-    max-width: 100%;
-    max-height: 100%;
-}
+        main {
+            padding: 20px;
+        }
 
-     
+        .product-section {
+            display: none;
+        }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-}
+        .products {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
 
         .product {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
+            background-color: #333;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+        }
 
-.product img {
-    max-width: 100%;
-    height: auto;
-}
+        .product img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
 
+        .product img:hover {
+            transform: scale(1.2);
+        }
 
-.products {
-    text-align: center;
-    margin-top: 20px;
-}
+        button.addToCart {
+            background-color: #ff6f61;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.product {
-    display: inline-block;
-    margin: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+        button.addToCart:hover {
+            background-color: #ff4c3b;
+        }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    color: #fff;
-}
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
-.hidden {
-    display: none;
-}
+        .modal-content {
+            background-color: #fff;
+            color: #000;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            position: relative;
+        }
 
-/* Styles pour le bouton d'interrogation */
-.interrogation-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #3498db;
-    border: none;
-    border-radius: 50%; /* Rendre le bouton rond */
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    line-height: 60px;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 999; /* Pour être au-dessus du reste du contenu */
-    transition: background-color 0.3s; /* Animation de transition */
-}
-
-.interrogation-button:hover {
-    background-color: #2980b9; /* Changement de couleur au survol */
-}
-
-/* Styles pour le bouton de menu */
-.menu-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.menu-icon {
-    width: 100%;
-    height: 4px;
-    background-color: #fff;
-    margin: 6px 0;
-}
-
-/* Styles pour la boîte de dialogue du code d'accès */
-.access-code-dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Pour être au-dessus du reste du contenu */
-}
-
-.access-code-dialog input {
-    margin-bottom: 10px;
-    display: block;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-/* Styles pour le formulaire d'abonnement */
-.abonnement-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Pour être au-dessus du reste du contenu */
-}
-
-.abonnement-form input {
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.abonnement-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background-color: #2ecc71;
-    border-radius: 50%; /* Rendre le bouton rond */
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    line-height: 60px;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 999; /* Pour être au-dessus du reste du contenu */
-    transition: background-color 0.3s; /* Animation de transition */
-}
-
-.abonnement-button:hover {
-    background-color: #27ae60; /* Changement de couleur au survol */
-}
-
-/* Styles pour le carré de modification */
-.modification-square {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: none; /* Caché par défaut */
-}
-
-/* Styles pour les boutons de modification */
-.modification-button {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px 20px; /* Ajout de padding pour un meilleur aspect */
-    background-color: #3498db;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Animation de transition */
-}
-
-.modification-button:hover {
-    background-color: #2980b9; /* Changement de couleur au survol */
-}
-
-        /* Les styles sont inchangés */
-        .menu-button {
+        .close {
             position: absolute;
             top: 10px;
-            right: 10px;
+            right: 20px;
+            font-size: 1.5em;
             cursor: pointer;
         }
 
-/* Style pour le texte à l'intérieur du carré */
-        #about-content {
-            font-size: 14px;
-        }  
-        .a2a_button_snapchat {
-            background-color: yellow;
-        }
-        /* Styles pour la section d'accueil */
-        
-
-
-        .accueil {
-    background-image: url("https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/183d0bf0-b8a6-e0d3-5bbf-6ac87dc0f8dc.jpeg"); /* Remplacez "chemin/vers/votre/image.jpg" par le chemin de votre image */
-    background-size: cover; /* Pour que l'image remplisse l'ensemble de la section */
-    background-position: center; /* Pour centrer l'image dans la section */
-    color: white; /* Couleur du texte pour une meilleure lisibilité sur l'image */
-    text-align: center; /* Pour centrer le contenu textuel */
-    padding: 100px 0; /* Ajustez le rembourrage selon vos préférences */
-}
-
-
-        .accueil h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .accueil p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-
-        /* Styles pour les boutons d'action */
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #FF5733;
-            color: #fff;
-            text-decoration: none;
+        form input,
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
             border-radius: 5px;
-            font-size: 20px;
-            margin-right: 20px;
+            border: 1px solid #ccc;
         }
 
-        .cta-button:hover {
-            background-color: #FF5733; /* Changement de couleur au survol */
+        form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        
 
+        form button:hover {
+            background-color: #45a049;
+        }
 
+        #cartButton {
+            background-color: #ff9800;
+            padding: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.carousel {
-    display: flex;
-    overflow-x: auto; /* Permet le défilement horizontal */
-    scroll-snap-type: x mandatory; /* Force le défilement d'une image à la fois */
-    scroll-behavior: smooth; /* Ajoute un défilement fluide */
-    width: 100%;
-    height: 150px; /* Hauteur de votre choix */
-    margin: 0 auto; /* Centre le carousel */
-    animation: scroll 5s infinite linear; /* Défilement automatique */
-}
+        #cartButton:hover {
+            background-color: #ff7800;
+        }
 
-.item {
-    flex: 0 0 auto; /* Empêche le redimensionnement des éléments */
-    scroll-snap-align: start; /* Aligne chaque image sur le début de la fenêtre d'affichage */
-    margin-right: 10px; /* Marge entre chaque image */
-    min-width: 200px; /* Largeur minimale pour afficher l'image */
-    height: 100px; /* Hauteur de votre choix */
-    background-size: cover; /* Redimensionne l'image pour couvrir toute la zone */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
-}
+        #cartTotal {
+            font-weight: bold;
+            color: #333;
+        }
 
-/* Animation pour le défilement automatique */
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
+        @media (max-width: 768px) {
+            .products {
+                flex-direction: column;
+                align-items: center;
+            }
 
-   </style>
+            .product {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+            }
+
+            nav button {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .description {
+            background-color: #444;
+            padding: 5px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
-<!-- Section d'accueil -->
-<section class="accueil">
-    <h2 style="color: black;">Bienvenue chez.   LZ GAnG !</h2>
+    <header>
+        <h1>En Ligne Shop</h1>
 
-    <p style="color: black;">Découvrez nos produits de qualité et profitez d'une expérience d'achat exceptionnelle.</p>
+        <section class="description">
+            <h2>
+                À propos de nous 
+                <span id="toggleDescription" style="cursor: pointer;">▼</span>
+            </h2>
+            <p id="descriptionText" style="display: none;">
+                Bienvenue sur notre site ! Vous pouvez planifier votre commande pour une livraison entre 21h et 5h30 du matin. Passez votre commande à partir de 20h et choisissez le créneau qui vous convient le mieux.
+            </p>
+        </section>
 
-    <a href="#produits" class="cta-button">Découvrir nos produits</a>
-</section>
-</br>
-<div class="carousel">
-        <div class="item" style="background-image: url('https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/744b6860-cdec-d51e-8730-acdd9a95d8f3.jpg');"></div>
-        <div class="item" style="background-image: url('https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/eb78b0ae-06cf-777e-5877-6876a6ce3c2b.jpeg');"></div>
-      <div class="item" style="background-image: url('https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/744b6860-cdec-d51e-8730-acdd9a95d8f3.jpg');"></div>
+        <script>
+            const toggleButton = document.getElementById('toggleDescription');
+            const descriptionText = document.getElementById('descriptionText');
 
-        <!-- Ajoutez plus d'éléments avec la classe "item" pour plus d'images -->
-</div>
-    
+            toggleButton.addEventListener('click', () => {
+                if (descriptionText.style.display === 'none') {
+                    descriptionText.style.display = 'block';
+                    toggleButton.textContent = '▲';
+                } else {
+                    descriptionText.style.display = 'none';
+                    toggleButton.textContent = '▼';
+                }
+            });
+        </script>
 
-    
-<!-- Image horizontale -->
-    <!-- Vos produits existants -->
-    <section id="produits" class="products">
-        <!-- Vos produits existants -->
-  <img id="imagePrincipale1" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/eb78b0ae-06cf-777e-5877-6876a6ce3c2b.jpeg" alt="Réfrigérateur">
-            <h2 style="font-size: 24px; color: #FF5733; text-decoration: underline;">BONBONNE</h2>
-            <p id="descriptionProduit2" style="font-style: italic; color: #333; margin-bottom: 10px;">100 % made in France</p>
-            <p id="prixProduit1" style="font-weight: bold; color: #FF5733; margin-bottom: 10px;">Prix: 90€</p>
-            <a href="tel:+07 44 89 27 82" style="display: inline-block; padding: 10px 20px; background-color: #FF5733; color: white; text-decoration: none; border-radius: 5px;">Acheter</a>
-            <p style="font-style: italic;">Maintenant</p>
+        <nav>
+            <button class="categoryButton" data-category="boissons">Boissons</button>
+            <button class="categoryButton" data-category="gourmandises">Gourmandises</button>
+            <button class="categoryButton" data-category="creme-de-luxe">Crème de Luxe</button>
+            <button class="categoryButton" data-category="cigarettes-electroniques">Cigarettes Électroniques</button>
+        </nav>
+        <button id="cartButton">Voir le panier (<span id="cartCount">0</span>)</button>
+    </header>
+
+<main>
+    <div class="products">
+        <div class="product">
+            <img src="https://example.com/montre-connectee.jpg" alt="Montre Connectée" class="zoom">
+            <h3>Montre Connectée</h3>
+            <p>Prix: 45€</p>
+            <button class="addToCart" data-name="Montre Connectée" data-price="45">Ajouter au panier</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/chargeur-iphone.jpg" alt="Chargeur iPhone" class="zoom">
+            <h3>Chargeur iPhone</h3>
+            <p>Prix: 10€</p>
+            <button class="addToCart" data-name="Chargeur iPhone" data-price="10">Ajouter au panier</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/chargeur-samsung.jpg" alt="Chargeur Samsung" class="zoom">
+            <h3>Chargeur Samsung</h3>
+            <p>Prix: 10€</p>
+            <button class="addToCart" data-name="Chargeur Samsung" data-price="10">Ajouter au panier</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/feuille-ocb.jpg" alt="Feuille OCB" class="zoom">
+            <h3>Feuille OCB</h3>
+            <p>Prix: 30€</p>
+            <button class="addToCart" data-name="Feuille OCB" data-price="30">Ajouter au panier</button>
+        </div>
     </div>
-    
-        
-        <div class="product">
-            <img id="imagePrincipale2" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/07d8d2e1-0b51-819c-a38a-473998039de2.jpeg" alt="Lave-linge">
-            <h2 style="font-size: 24px; color: #FF5733; text-decoration: underline;">OCB Slim</h2>
-            <p id="descriptionProduit2" style="font-style: italic; color: #333; margin-bottom: 10px;">100 % made in France</p>
-            <p id="prixProduit1" style="font-weight: bold; color: #FF5733; margin-bottom: 10px;">Prix: 30€</p>
-            <a href="tel:+07 44 89 27 82" style="display: inline-block; padding: 10px 20px; background-color: #FF5733; color: white; text-decoration: none; border-radius: 5px;">Acheter</a>
-            <p style="font-style: italic;">Maintenant</p>
+</main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Votre Panier</h2>
+            <div id="cartItems"></div>
+            <p>Total: <span id="cartTotal">0€</span></p>
+            <button id="checkoutButton">Finaliser la commande</button>
         </div>
-
-        
-        <div class="product">
-            <img id="imagePrincipale3" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/63cfe854-c0b0-8b8f-0a88-57814b6cd354.jpeg" alt="Cuisinière">
-            <h2 style="font-size: 24px; color: #FF5733; text-decoration: underline;">OCB Slim</h2>
-            <p id="descriptionProduit2" style="font-style: italic; color: #333; margin-bottom: 10px;">100 % made in France</p>
-            <p id="prixProduit1" style="font-weight: bold; color: #FF5733; margin-bottom: 10px;">Prix: 30€</p>
-            <a href="tel:+07 44 89 27 82" style="display: inline-block; padding: 10px 20px; background-color: #FF5733; color: white; text-decoration: none; border-radius: 5px;">Acheter</a>
-            <p style="font-style: italic;">Maintenant</p>
-        </div>
-        <div class="product">
-            <img id="imagePrincipale4" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/104a86e7-5a84-12d0-ba7f-f51846c9e53b.jpeg" alt="Four">            
-        </div>
-
-
-<div class="product">           
-            <img id="imagePrincipale1" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/e9ad1119-09db-c86b-0b37-3ec7f0406883.jpg" alt="Réfrigérateur">
-            <h2 style="font-size: 24px; color: #FF5733; text-decoration: underline;"> Briquet BIC </h2>
-            <p id="descriptionProduit2" style="font-style: italic; color: #333; margin-bottom: 10px;">100 % made in France</p>
-            <p id="prixProduit1" style="font-weight: bold; color: #FF5733; margin-bottom: 10px;">Prix: 29€</p>
-            <a href="tel:+07 44 89 27 82" style="display: inline-block; padding: 10px 20px; background-color: #FF5733; color: white; text-decoration: none; border-radius: 5px;">Acheter</a>
-            <p style="font-style: italic;">Maintenant</p>
-            
-</div>
-
-
- <div class="product">           
-            <img id="imagePrincipale1" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/e69b8122-9a4f-2541-2102-64c88397c3ff.jpg" alt="Réfrigérateur">
-            <h2 style="font-size: 24px; color: #FF5733; text-decoration: underline;">VIP Tik Tok ventouse </h2>
-            <p id="descriptionProduit2" style="font-style: italic; color: #333; margin-bottom: 10px;">100 % made in France</p>
-            <p id="prixProduit1" style="font-weight: bold; color: #FF5733; margin-bottom: 10px;">Prix: 30€</p>
-            <a href="tel:+07 44 89 27 82" style="display: inline-block; padding: 10px 20px; background-color: #FF5733; color: white; text-decoration: none; border-radius: 5px;">Acheter</a>
-            <p style="font-style: italic;">Maintenant</p>
-            
- </div>       
-        
-        <div class="product">
-            <div style="position: relative; display: inline-block;">
-              <img id="imagePrincipale5" src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/744b6860-cdec-d51e-8730-acdd9a95d8f3.jpg" alt="Micro-ondes" style="max-width: 100%;">
-              <div style="position: absolute; top: 5px; left: 5px; background-color: green; color: white; padding: 5px; border-radius: 5px;">
-                <span style="font-weight: bold;"> Non disponible </span>
-              </div>
-              <div style="position: absolute; bottom: 5px; left: 5px; background-color: rgba(0, 0, 0, 0.5); color: white; padding: 5px;">
-                pas disponible après Ramadan
-              </div>
-            </div>
-            <h2 style="font-size: 24px; color: #FF5733; text-decoration: underline;">BONBONNE crème de luxe </h2>
-            <p id="descriptionProduit2" style="font-style: italic; color: #333; margin-bottom: 10px;">100 % made in France</p>
-            <p id="prixProduit1" style="font-weight: bold; color: #FF5733; margin-bottom: 10px;">Prix : 20€</p>
-            <a href="tel:+07 44 89 27 82" style="display: inline-block; padding: 10px 20px; background-color: #FF5733; color: white; text-decoration: none; border-radius: 5px;">Acheter</a>
-        </div>
-    </section>
-
-    <!-- Votre section de contact existante -->
-    <section id="contact">
-        <!-- Votre section de contact existante -->
-    </section>
-
-
-  
-
-
-    <footer style="background-color: #3498db; color: #fff;">
-    <p>&copy; 2024 LZ GANG. Tous droits réservés.</p>
-    
-    <!-- Ajout des contacts -->
-    <div>
-        <h3>Contactez-nous</h3>
-        <ul>
-            <li><strong>Téléphone:</strong> +07 44 89 27 82</li>
-            <li><strong>Email:</strong> contact@Lzgang.com</li>
-            <li><strong>Adresse:</strong> traversedes rosier Marseille 13014. </li>
-            <!-- Ajoutez d'autres moyens de contact si nécessaire -->
-        </ul>
     </div>
-</footer>
 
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Finaliser la commande</h2>
+            <form id="checkoutForm" action="https://formspree.io/f/mjkbqoaw" method="POST">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                <label for="phone">Numéro de téléphone :</label>
+                <input type="tel" id="phone" name="phone" required>
+                <label for="address">Adresse :</label>
+                <input type="text" id="address" name="address" required>
 
-<div id="social-sharing">
-  <div id="social-sharing" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" style="left:0px; top:150px;">
-    <a class="a2a_button_snapchat"></a>
-    <a class="a2a_button_facebook"></a>
-    <a class="a2a_button_twitter"></a>
-    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
+                <label for="delivery">Mode de livraison :</label>
+                <select id="delivery" name="delivery" required>
+                    <option value="retrait">Retrait en magasin</option>
+                    <option value="livraison">Livraison à domicile</option>
+                </select>
+
+                <label for="deliveryTime">Horaires de livraison :</label>
+                <select id="deliveryTime" name="deliveryTime" required>
+                    <option value="" disabled selected>Sélectionnez un créneau horaire</option>
+                    <option value="20h30-21h00">20h30 - 21h00</option>
+                    <option value"21h00-21h30">21h00 - 21h30</option>
+                    <option value="21h30-22h00">21h30 - 22h00</option>
+                    <option value="22h00-22h30">22h00 - 22h30</option>
+                    <option value="22h30-23h00">22h30 - 23h00</option>
+                    <option value="23h00-23h30">23h00 - 23h30</option>
+                    <option value="23h30-00h00">23h30 - 00h00</option>
+                    <option value="00h00-00h30">00h00 - 00h30</option>
+                    <option value="00h30-01h00">00h30 - 01h00</option>
+                    <option value="01h00-01h30">01h00 - 01h30</option>
+                    <option value="01h30-02h00">01h30 - 02h00</option>
+                    <option value="02h00-02h30">02h00 - 02h30</option>
+                    <option value="02h30-03h00">02h30 - 03h00</option>
+                    <option value="03h00-03h30">03h00 - 03h30</option>
+                    <option value="03h30-04h00">03h30 - 04h00</option>
+                    <option value="04h00-04h30">04h00 - 04h30</option>
+                    <option value="04h30-05h00">04h30 - 05h00</option>
+                    <option value="05h00-05h30">05h00 - 05h30</option>
+                </select>
+
+                <button type="submit">Passer la commande</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-  var socialSharing = document.getElementById('social-sharing');
+        // Gestion de l'affichage des catégories
+        const categoryButtons = document.querySelectorAll('.categoryButton');
+        const productsSection = document.querySelector('.products');
+        const cartButton = document.getElementById('cartButton');
+        const cartModal = document.getElementById('cartModal');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const cartCount = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
 
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 0) { // Si la page est défilée vers le bas
-      socialSharing.style.display = 'none'; // Masquer le code
-    } else { // Si la page est défilée vers le haut
-      socialSharing.style.display = 'block'; // Afficher le code
-    }
-  });
-    </script>
-    
-    <!-- Bouton d'interrogation -->
-    <button class="interrogation-button" onclick="toggleDialog()">?</button>
+        const products = {
+            boissons: [
+                { name: 'Coca Cola', price: 2, img: 'coca.jpg' },
+                { name: 'Pepsi', price: 1.8, img: 'pepsi.jpg' },
+                { name: 'Fanta', price: 2.2, img: 'fanta.jpg' }
+            ],
+            gourmandises: [
+                { name: 'Chocolat', price: 3.5, img: 'chocolat.jpg' },
+                { name: 'Bonbons', price: 2.5, img: 'bonbons.jpg' },
+                { name: 'Cookies', price: 4, img: 'cookies.jpg' }
+            ],
+            'creme-de-luxe': [
+                { name: 'Crème de Luxe 1', price: 20, img: 'creme1.jpg' },
+                { name: 'Crème de Luxe 2', price: 25, img: 'creme2.jpg' }
+            ],
+            'cigarettes-electroniques': [
+                { name: 'Cigarette Électronique 1', price: 40, img: 'cigarette1.jpg' },
+                { name: 'Cigarette Électronique 2', price: 45, img: 'cigarette2.jpg' }
+            ]
+        };
 
-    <!-- Bouton de menu -->
-    <div id="menuButton" class="menu-button" onclick="toggleMenu()">
-        <div class="menu-icon"></div>
-        <div class="menu-icon"></div>
-        <div class="menu-icon"></div>
-    </div>
+        let cart = [];
 
-    <!-- Boîte de dialogue du code d'accès -->
-    <div id="accessCodeDialog" class="hidden access-code-dialog">
-        <h2> Accès partenariat </h2>
-        <input type="password" id="accessCodeInput" placeholder="Code d'accès"><br>
-        <button onclick="verifierCode()">Valider</button>
-    </div>
+        // Fonction pour afficher les produits selon la catégorie
+        function displayProducts(category) {
+            productsSection.innerHTML = '';
+            products[category].forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price.toFixed(2)}€</p>
+                    <button class="addToCart" data-name="${product.name}" data-price="${product.price}">Ajouter au panier</button>
+                `;
+                productsSection.appendChild(productDiv);
+            });
 
-    <!-- Bouton "S'abonner" -->
-    <button class="abonnement-button" onclick="toggleAbonnement()">S'abonner</button>
-
-    <!-- Formulaire d'abonnement -->
-    <div id="abonnementForm" class="hidden abonnement-form">
-        <h2>S'abonner</h2>
-        <form>
-           <input type="email" placeholder="Email" id="emailInput" required><br>
-            <input type="tel" placeholder="Numéro de téléphone" id="telephoneInput" required><br>
-            <input type="password" placeholder="Mot de passe" id="passwordInput" required><br>
-            <button type="button" onclick="sabonner()">S'abonner</button>
-        </form>
-    </div>
-    <!-- Carré de modification -->
-    <div id="modificationSquare" class="modification-square" style="display: none;">
-        <h2>Menu de Modification</h2>
-        <button class="modification-button" onclick="modifierImagePrincipale()">Modifier l'image principale</button>
-        <button class="modification-button" onclick="modifierDescription()">Modifier la description</button>
-        <button class="modification-button" onclick="modifierPrix()">Modifier le prix</button>
-        <button class="modification-button" onclick="toggleMenu()">Fermer</button>
-    </div>
-    <script>
-        var accessCodeEntered = false;
-
-        // Fonction pour afficher ou cacher la boîte de dialogue du code d'accès
-        function toggleDialog() {
-            var dialog = document.getElementById("accessCodeDialog");
-            if (dialog.classList.contains("hidden")) {
-                dialog.classList.remove("hidden");
-            } else {
-                dialog.classList.add("hidden");
-            }
-        }
-
-        // Fonction pour vérifier le code d'accès
-        function verifierCode() {
-            var code = document.getElementById("accessCodeInput").value;
-            if (code === "15") { // Code d'accès prédéfini (à remplacer par votre propre code)
-                accessCodeEntered = true;
-                document.getElementById("menuButton").classList.remove("menu-button-disabled");
-                // Afficher le carré de modification si le code est correct
-                document.getElementById("modificationSquare").style.display = "block";
-                // Cacher la boîte de dialogue du code d'accès
-                document.getElementById("accessCodeDialog").classList.add("hidden");
-            } else {
-                alert("Code incorrect. Veuillez réessayer.");
-            }
-        }
-
-        // Fonction pour afficher ou cacher le formulaire d'abonnement
-        function toggleAbonnement() {
-            var form = document.getElementById("abonnementForm");
-            if (form.classList.contains("hidden")) {
-                form.classList.remove("hidden");
-            } else {
-                form.classList.add("hidden");
-            }
-        }
-
-        // Fonction pour traiter l'abonnement
-        function sabonner() {
-            // Récupérer les valeurs des champs du formulaire
-            var email = document.getElementById("emailInput").value;
-            var telephone = document.getElementById("telephoneInput").value;
-            var motDePasse = document.getElementById("passwordInput").value;
-            
-            // Traitement de l'abonnement (vous pouvez remplacer cette partie par votre propre logique d'abonnement)
-            // Par exemple, vous pouvez utiliser Firebase pour gérer l'authentification et l'inscription des utilisateurs.
-            // Voici un exemple d'utilisation de Firebase pour l'authentification :
-            firebase.auth().createUserWithEmailAndPassword(email, motDePasse)
-                .then((userCredential) => {
-                    // Inscription réussie, vous pouvez rediriger l'utilisateur ou effectuer d'autres actions
-                    alert("Inscription réussie !");
-                    // Fermer le formulaire d'abonnement
-                    toggleAbonnement();
-                })
-                .catch((error) => {
-                    // Gérer les erreurs d'inscription (par exemple, afficher un message d'erreur à l'utilisateur)
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    alert(errorMessage);
+            // Ajouter au panier
+            const addToCartButtons = document.querySelectorAll('.addToCart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const name = e.target.dataset.name;
+                    const price = parseFloat(e.target.dataset.price);
+                    addToCart({ name, price });
                 });
+            });
         }
 
-        // Fonction pour modifier l'image principale
-        function modifierImagePrincipale() {
-            if (!accessCodeEntered) {
-                return; // Ne rien faire si le code d'accès n'a pas été entré
-            }
+        // Afficher les produits d'une catégorie au clic
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const category = e.target.dataset.category;
+                displayProducts(category);
+            });
+        });
 
-            var nouvelleImage = prompt("Entrez l'URL de la nouvelle image :");
-            if (nouvelleImage !== null) {
-                // Remplacer l'attribut src de l'élément img avec la nouvelle image
-                var product = prompt("Entrez le numéro de produit (1 à 5) :");
-                if (product >= 1 && product <= 5) {
-                    document.getElementById("imagePrincipale" + product).src = nouvelleImage;
-                } else {
-                    alert("Numéro de produit invalide.");
-                }
+        // Ajouter un produit au panier
+        function addToCart(product) {
+            const existingProduct = cart.find(item => item.name === product.name);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
             }
+            updateCart();
         }
 
-        // Fonction pour modifier la description du produit
-        function modifierDescription() {
-            if (!accessCodeEntered) {
-                return; // Ne rien faire si le code d'accès n'a pas été entré
-            }
-
-            var nouvelleDescription = prompt("Entrez la nouvelle description :");
-            if (nouvelleDescription !== null) {
-                // Remplacer le contenu de l'élément p avec la nouvelle description
-                var product = prompt("Entrez le numéro de produit (1 à 5) :");
-                if (product >= 1 && product <= 5) {
-                    document.getElementById("descriptionProduit" + product).textContent = nouvelleDescription;
-                } else {
-                    alert("Numéro de produit invalide.");
-                }
-            }
+        // Mise à jour du panier
+        function updateCart() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.innerHTML = `${item.name} - ${item.quantity} x ${item.price.toFixed(2)}€ = ${(item.quantity * item.price).toFixed(2)}€`;
+                cartItemsContainer.appendChild(cartItem);
+                total += item.quantity * item.price;
+            });
+            cartTotal.textContent = total.toFixed(2) + '€';
+            cartCount.textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
         }
 
-        // Fonction pour modifier le prix du produit
-        function modifierPrix() {
-            if (!accessCodeEntered) {
-                return; // Ne rien faire si le code d'accès n'a pas été entré
-            }
 
-            var nouveauPrix = prompt("Entrez le nouveau prix :");
-            if (nouveauPrix !== null) {
-                // Remplacer le contenu de l'élément p avec le nouveau prix
-                var product = prompt("Entrez le numéro de produit (1 à 5) :");
-                if (product >= 1 && product <= 5) {
-                    document.getElementById("prixProduit" + product).textContent = "Prix: " + nouveauPrix + "€";
-                } else {
-                    alert("Numéro de produit invalide.");
-                }
-            }
-        }
+// Finalisation de la commande
+document.getElementById('checkoutButton').addEventListener('click', () => {
+    if (cart.length === 0) {
+        alert('Votre panier est vide. Vous devez ajouter des produits avant de finaliser la commande.');
+    } else {
+        cartModal.style.display = 'none';
+        checkoutModal.style.display = 'block';
+    }
+});
 
-        // Fonction pour afficher ou cacher le carré de modification
-        function toggleMenu() {
-            if (accessCodeEntered) {
-                var square = document.getElementById("modificationSquare");
-                if (square.style.display === "block") {
-                    square.style.display = "none";
-                } else {
-                    square.style.display = "block";
-                }
+
+
+
+    // Gestion du modal du panier
+        cartButton.addEventListener('click', () => {
+            cartModal.style.display = 'block';
+        });
+
+        document.querySelectorAll('.close').forEach(closeButton => {
+            closeButton.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+                checkoutModal.style.display = 'none';
+            });
+        });
+
+        // Finalisation de la commande
+        document.getElementById('checkoutButton').addEventListener('click', () => {
+            cartModal.style.display = 'none';
+            checkoutModal.style.display = 'block';
+        });
+
+        // Fermer les modals en cliquant en dehors
+        window.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
             }
-        }
+            if (e.target === checkoutModal) {
+                checkoutModal.style.display = 'none';
+            }
+        });
     </script>
 </body>
-                </html>
+
+    </html>
